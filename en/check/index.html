@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nishikie Lab Compatibility Check — will it run on your computer?</title>
+<meta name="description" content="Check on the spot whether Nishikie Lab runs on your computer and browser. Tests WebGL2 and 16-bit float layer support. Nothing is saved or sent.">
+<link rel="canonical" href="https://naocgart-sudo.github.io/nishikie-lab/en/check/">
+<link rel="alternate" hreflang="ja" href="https://naocgart-sudo.github.io/nishikie-lab/check/">
+<link rel="alternate" hreflang="en" href="https://naocgart-sudo.github.io/nishikie-lab/en/check/">
+<link rel="icon" href="../../assets/favicon-32.png" sizes="32x32">
+<meta property="og:title" content="Nishikie Lab Compatibility Check — will it run on your computer?"><meta property="og:description" content="Check on the spot whether Nishikie Lab runs on your computer and browser. Tests WebGL2 and 16-bit float layer support. Nothing is saved or sent.">
+<meta property="og:image" content="https://naocgart-sudo.github.io/nishikie-lab/assets/og-en.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root{ --bg:#14171c; --panel:#1c2027; --line:#2c323b; --text:#dfe4ea; --dim:#8a919c;
+         --ok:#4bd07a; --ng:#ff5f57; --warn:#e8a34c; }
+  *{ box-sizing:border-box }
+  body{ margin:0; padding:14px; background:var(--bg); color:var(--text);
+        font:14px/1.6 system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif }
+  h1{ font-size:17px; margin:0 0 4px }
+  p.lead{ color:var(--dim); font-size:12px; margin:0 0 14px }
+  .verdict{ border-radius:10px; padding:14px; margin-bottom:14px; font-weight:700; font-size:16px;
+            border:2px solid var(--line); background:var(--panel) }
+  .verdict.ok{ border-color:var(--ok); color:var(--ok) }
+  .verdict.ng{ border-color:var(--ng); color:var(--ng) }
+  .verdict.warn{ border-color:var(--warn); color:var(--warn) }
+  .verdict small{ display:block; font-weight:400; font-size:12px; color:var(--text); margin-top:6px }
+  table{ width:100%; border-collapse:collapse; background:var(--panel); border-radius:8px; overflow:hidden }
+  td{ padding:8px 10px; border-top:1px solid var(--line); vertical-align:top; font-size:13px }
+  tr:first-child td{ border-top:none }
+  td.k{ color:var(--dim); width:44%; word-break:break-word }
+  td.v{ word-break:break-word }
+  .ok{ color:var(--ok) } .ng{ color:var(--ng) } .warn{ color:var(--warn) }
+  .sec{ margin:16px 0 6px; color:var(--dim); font-size:11px; letter-spacing:.08em }
+  button{ width:100%; margin-top:14px; padding:12px; font-size:15px; border-radius:8px;
+          border:1px solid var(--line); background:var(--panel); color:var(--text) }
+  button:active{ background:#252a33 }
+  textarea{ width:100%; height:140px; margin-top:10px; background:#0f1216; color:var(--dim);
+            border:1px solid var(--line); border-radius:6px; padding:8px; font:11px/1.5 monospace }
+  canvas{ display:none }
+</style></head><body>
+<p style="margin:0 0 12px;font-size:13px"><a href="../" style="color:#8a919c">← Back to Nishikie Lab</a></p>
+<h1>Nishikie Lab Environment Check</h1>
+<p class="lead">This page only checks whether Nishikie Lab can run on your device. It saves nothing and sends nothing anywhere.<br>
+If you report a problem, please copy the results with the button below and send them to <a href="https://x.com/nao3art" target="_blank" rel="noopener">@nao3art</a> on X (Twitter); it helps us investigate faster.</p>
+<div id="verdict" class="verdict">Checking…
+  <small>If nothing appears beyond this message, the page is open somewhere scripts can't run.
+  Instead of the "preview" in a mail or chat app, <b>save the file to your device first, then
+  open it directly in Safari or Chrome</b>.</small></div>
+<div id="out"></div>
+<button id="copy">Copy results</button>
+<textarea id="raw" readonly></textarea>
+<canvas id="cv" width="64" height="64"></canvas>
+<script>
+// This page's job: always report something, no matter how broken the environment is.
+// 1. Don't stop on exceptions midway (each section is wrapped in try + caught by onerror)
+// 2. If finish is never reached, a 3-second watchdog forces the results out
+// 3. Where JS doesn't run at all (attachment previews in mail/chat apps) we can't bake a
+//    noscript-style notice into the verdict, so the "how to open" note below stays on the page
+(function(){
+  const rows = [];
+  let finished = false;
+  window.onerror = function(msg, src, line){
+    try{
+      rows.push({sec: 'Error'});
+      rows.push({k: 'Script error', v: msg + ' (line ' + line + ')', cls: 'ng'});
+      finish(true);
+    }catch(e){}
+    return false;
+  };
+  const add = (k, v, cls) => rows.push({k, v: String(v), cls: cls || ''});
+  const sec = (t) => rows.push({sec: t});
+  const yes = b => b ? 'Yes' : 'No';
+
+  sec('Device');
+  add('Screen', screen.width + '×' + screen.height + ' / DPR ' + (window.devicePixelRatio || 1));
+  add('Browser', navigator.userAgent);
+
+  // --- WebGL2 ---
+  sec('WebGL2 (required)');
+  const cv = document.getElementById('cv');
+  let gl = null, fatal = false, warn = false;
+  try{ gl = cv.getContext('webgl2', {antialias:false}); }catch(e){}
+  add('WebGL2', yes(!!gl), gl ? 'ok' : 'ng');
+  if(!gl){ fatal = true; }
+  else{
+    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+    add('GPU', dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : '(hidden)');
+    const maxTex = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+    add('Max texture size', maxTex + 'px', maxTex >= 4096 ? 'ok' : 'warn');
+    if(maxTex < 4096) warn = true;
+
+    // Can a 16-bit float texture be used as a render target? Nishikie Lab layers depend on this
+    sec('16-bit float layers (core requirement)');
+    const efl = gl.getExtension('EXT_color_buffer_float');
+    const ehf = gl.getExtension('EXT_color_buffer_half_float');
+    add('EXT_color_buffer_float', yes(!!efl), efl ? 'ok' : 'warn');
+    add('EXT_color_buffer_half_float', yes(!!ehf), ehf ? 'ok' : 'warn');
+    // Actually create one and test rather than trusting the declaration (some implementations pass without the extension)
+    let renderable = false, readback = null;
+    try{
+      const tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, 8, 8, 0, gl.RGBA, gl.HALF_FLOAT, null);
+      const fbo = gl.createFramebuffer();
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+      renderable = gl.checkFramebufferStatus(gl.FRAMEBUFFER) === gl.FRAMEBUFFER_COMPLETE;
+      if(renderable){
+        gl.viewport(0, 0, 8, 8);
+        gl.clearColor(0.25, 0.5, 0.75, 1);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        const px = new Float32Array(4);
+        gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.FLOAT, px);
+        readback = (gl.getError() === gl.NO_ERROR)
+          ? [px[0].toFixed(2), px[1].toFixed(2), px[2].toFixed(2)].join(', ') : 'Cannot read back';
+      }
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    }catch(e){ readback = 'Error: ' + e.message; }
+    add('Can render to RGBA16F', yes(renderable), renderable ? 'ok' : 'ng');
+    add('Can read back written values', readback === null ? '—' : readback,
+        (readback && readback.indexOf('0.25') === 0) ? 'ok' : 'warn');
+    if(!renderable) fatal = true;
+    if(readback && readback.indexOf('0.25') !== 0) warn = true;
+
+    sec('Other GL');
+    add('Float filtering (OES_texture_float_linear)', yes(!!gl.getExtension('OES_texture_float_linear')));
+    add('Max texture units', gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS));
+    add('Max uniform vectors (vertex)', gl.getParameter(gl.MAX_VERTEX_UNIFORM_VECTORS));
+  }
+
+  // --- Saving ---
+  sec('Saving');
+  let ls = false;
+  try{ localStorage.setItem('__t','1'); ls = localStorage.getItem('__t') === '1'; localStorage.removeItem('__t'); }catch(e){}
+  add('localStorage', yes(ls), ls ? 'ok' : 'warn');
+  // In sandboxed environments, even accessing the indexedDB property can throw
+  let idb = false; try{ idb = (typeof indexedDB !== 'undefined') && !!indexedDB; }catch(e){}
+  add('IndexedDB (auto backup)', yes(idb), idb ? 'ok' : 'warn');
+  let fsa = false; try{ fsa = typeof window.showSaveFilePicker === 'function'; }catch(e){}
+  add('Save directly to file', yes(fsa), fsa ? 'ok' : 'warn');
+  add('gzip compression (CompressionStream)', yes(typeof CompressionStream !== 'undefined'));
+  add('secure context', yes(window.isSecureContext));
+
+  // --- Input ---
+  sec('Input');
+  add('Pointer Events', yes(typeof PointerEvent !== 'undefined'),
+      typeof PointerEvent !== 'undefined' ? 'ok' : 'ng');
+  add('Touch points', navigator.maxTouchPoints || 0);
+  if(typeof PointerEvent === 'undefined') fatal = true;
+
+  // --- Free space ---
+  const finish = (isError)=>{
+    if(finished) return;
+    finished = true;
+    const out = document.getElementById('out');
+    let html = '';
+    for(const r of rows){
+      if(r.sec){ html += '</table><div class="sec">' + r.sec + '</div><table>'; continue; }
+      html += '<tr><td class="k">' + r.k + '</td><td class="v ' + r.cls + '">' + r.v + '</td></tr>';
+    }
+    out.innerHTML = ('<table>' + html + '</table>').replace('<table></table>', '');
+
+    const v = document.getElementById('verdict');
+    if(isError){
+      v.className = 'verdict ng';
+      v.innerHTML = '× An error occurred during the check<small>Please keep the results so far and the error message. ' +
+        'Including them when you contact us gives us a lead for the investigation.</small>';
+    }else if(fatal){
+      v.className = 'verdict ng';
+      v.innerHTML = '× Nishikie Lab cannot run on this device<small>WebGL2 or 16-bit float layers are not available. ' +
+        'Please consider using a different device or browser.</small>';
+    }else if(warn){
+      v.className = 'verdict warn';
+      v.innerHTML = '△ Should run, but with some limitations<small>If you contact us, please include the orange items below.</small>';
+    }else{
+      v.className = 'verdict ok';
+      v.innerHTML = '○ Should run without problems<small>You can use it as is.</small>';
+    }
+    const text = rows.map(r => r.sec ? '\n[' + r.sec + ']' : r.k + ': ' + r.v).join('\n');
+    document.getElementById('raw').value =
+      'Nishikie Lab Environment Check / ' + (fatal ? 'NG' : warn ? 'WARN' : 'OK') + text;
+  };
+
+  // A 3-second watchdog so we don't hang silently where the Promise neither resolves nor rejects
+  setTimeout(()=>{ if(!finished){ add('Note', 'Free space check skipped: no response within 3 seconds', 'warn'); finish(); } }, 3000);
+  let est = null;
+  try{ est = navigator.storage && navigator.storage.estimate ? navigator.storage.estimate() : null; }catch(e){}
+  if(est){
+    est.then(e=>{
+      sec('Free space');
+      add('Browser quota', Math.round((e.quota || 0) / 1048576) + ' MB');
+      add('In use', Math.round((e.usage || 0) / 1048576) + ' MB');
+      finish();
+    }).catch(()=>finish());
+  }else finish();
+
+  document.getElementById('copy').addEventListener('click', ()=>{
+    const ta = document.getElementById('raw');
+    ta.select(); ta.setSelectionRange(0, 99999);
+    const done = ()=>{ const b = document.getElementById('copy');
+      b.textContent = 'Copied'; setTimeout(()=> b.textContent = 'Copy results', 1600); };
+    if(navigator.clipboard) navigator.clipboard.writeText(ta.value).then(done, ()=>{ document.execCommand('copy'); done(); });
+    else { document.execCommand('copy'); done(); }
+  });
+})();
+</script>
+</body></html>

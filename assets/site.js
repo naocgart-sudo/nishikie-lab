@@ -35,6 +35,38 @@
     document.documentElement.classList.add('noscript');
   }
 
+  // ── 動きで見る：media.json の並びどおりに組み立てる ──
+  // 素材の追加・差し替えは assets/ にファイルを置いて media.json を1行足すだけ。
+  // 読めなかったときは HTML に書いてある既定の4本がそのまま残る。
+  var gal = document.getElementById('gallery');
+  var me = document.querySelector('script[src$="site.js"]');
+  if(gal && me && window.fetch){
+    var base = new URL('../', me.src);            // サイトの一番上
+    var lang = (document.documentElement.lang || 'ja').slice(0,2);
+    fetch(new URL('media.json', base), {cache:'no-cache'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(list){
+      if(!list || !list.length) return;
+      var esc = function(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+      var html = list.filter(function(m){ return m && m.file && !m.hidden; }).map(function(m){
+        var t = m[lang] || m.ja || m.en || {};
+        var src = new URL('assets/' + m.file, base).href;
+        var isVid = /\.(mp4|webm|mov)$/i.test(m.file);
+        var poster = m.poster ? new URL('assets/' + m.poster, base).href : '';
+        var media = isVid
+          ? '<video data-auto muted loop playsinline preload="' + (poster ? 'none' : 'metadata') + '"' + (poster ? ' poster="' + poster + '"' : '') +
+            ' aria-label="' + esc(t.title) + '"><source src="' + src + (poster ? '' : '#t=0.1') + '"></video>'
+          : '<img src="' + src + '" loading="lazy" alt="' + esc(t.alt || t.title) + '">';
+        return '<figure class="clip rv' + (m.wide ? ' wide' : '') + '">' + media +
+          '<figcaption><b>' + esc(t.title) + '</b><span>' + esc(t.desc) + '</span></figcaption></figure>';
+      }).join('');
+      if(!html) return;
+      gal.innerHTML = html;
+      gal.querySelectorAll('.rv').forEach(function(el){
+        if(typeof io !== 'undefined'){ io.observe(el); pend.push(el); } else el.classList.add('in');
+      });
+      gal.querySelectorAll('video[data-auto]').forEach(function(v){ if(typeof vo !== 'undefined') vo.observe(v); });
+    }).catch(function(){});
+  }
+
   // hero: 一本の線＝ひとつの距離場。墨の波線が紙の上をゆっくり流れる
   var cv = document.getElementById('heroGL');
   if(!cv) return;

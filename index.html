@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nishikie Lab（錦絵ラボ）｜ブラウザで動くシェーダーペイントソフト・インストール不要</title>
+<meta name="description" content="Nishikie Lab（錦絵ラボ）は、ブラシも紙も効果もGLSLシェーダーでできたペイントソフト。HTMLファイル1個をブラウザで開くだけ、インストール不要・通信なし・広告なし。ブラシを自作でき、AIに頼んだコードもそのまま使えます。無料版あり。">
+<link rel="canonical" href="https://naocgart-sudo.github.io/nishikie-lab/">
+<link rel="alternate" hreflang="ja" href="https://naocgart-sudo.github.io/nishikie-lab/">
+<link rel="alternate" hreflang="en" href="https://naocgart-sudo.github.io/nishikie-lab/en/">
+<link rel="alternate" hreflang="x-default" href="https://naocgart-sudo.github.io/nishikie-lab/en/">
+<meta name="theme-color" content="#f3ede2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14171d" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nishikie Lab（錦絵ラボ）">
+<meta property="og:title" content="Nishikie Lab（錦絵ラボ）— ブラシも、紙も、光も、ぜんぶシェーダー。">
+<meta property="og:description" content="ブラウザで動くペイントソフト。HTML1個・インストール不要・通信なし。ブラシを自作でき、無料版もあります。">
+<meta property="og:url" content="https://naocgart-sudo.github.io/nishikie-lab/">
+<meta property="og:image" content="https://naocgart-sudo.github.io/nishikie-lab/assets/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nao3art"><meta name="twitter:creator" content="@nao3art">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="preload" as="image" href="assets/dragon.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://naocgart-sudo.github.io/nishikie-lab/#app",
+      "name": "Nishikie Lab",
+      "alternateName": ["錦絵ラボ", "NishikieLab"],
+      "description": "ブラシ・紙・レイヤー効果がすべてGLSLシェーダーでできたペイントソフト。HTMLファイル1個をブラウザで開くだけで動き、インストール不要・通信なし。",
+      "applicationCategory": "DesignApplication",
+      "applicationSubCategory": "ペイントソフト",
+      "operatingSystem": "Windows, macOS, Linux（WebGL2対応ブラウザ）",
+      "inLanguage": ["ja", "en"],
+      "image": "https://naocgart-sudo.github.io/nishikie-lab/assets/og.jpg",
+      "screenshot": "https://naocgart-sudo.github.io/nishikie-lab/assets/f-code.webp",
+      "url": "https://naocgart-sudo.github.io/nishikie-lab/",
+      "author": {"@id": "https://naocgart-sudo.github.io/nishikie-lab/#eshido"},
+      "offers": [
+        {"@type": "Offer", "name": "製品版（BOOTH）", "price": "500", "priceCurrency": "JPY", "url": "https://eshido.booth.pm/", "availability": "https://schema.org/InStock"},
+        {"@type": "Offer", "name": "無料版（保存なし）", "price": "0", "priceCurrency": "JPY", "url": "https://eshido.booth.pm/", "availability": "https://schema.org/InStock"}
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://naocgart-sudo.github.io/nishikie-lab/#eshido",
+      "name": "絵師堂 (Eshido)",
+      "logo": "https://naocgart-sudo.github.io/nishikie-lab/assets/icon-192.png",
+      "sameAs": ["https://x.com/nao3art", "https://eshido.booth.pm/", "https://naocraft5.gumroad.com/"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "インストールは必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "不要です。同梱のHTMLファイル1個をダブルクリックすると、ブラウザで開いてすぐ描き始められます。"}},
+        {"@type": "Question", "name": "無料版と製品版の違いは？", "acceptedAnswer": {"@type": "Answer", "text": "描く機能は同じです。無料版はプロジェクト保存・PNG/PSD書き出し・自動バックアップができません。描いた絵は「画像をコピー」でSNSなどに貼り付けられます。"}},
+        {"@type": "Question", "name": "グラフィックボードは必要ですか？", "acceptedAnswer": {"@type": "Answer", "text": "不要です。2012年以降のCPU内蔵GPU（Intel HD 4000、AMD APU、Apple Mシリーズなど）で動きます。WebGL2対応のブラウザが必要です。"}},
+        {"@type": "Question", "name": "描いた絵はインターネットに送られますか？", "acceptedAnswer": {"@type": "Answer", "text": "送られません。標準の状態ではインターネットとの通信を行わず、広告もありません。"}},
+        {"@type": "Question", "name": "描いた作品を商用利用できますか？", "acceptedAnswer": {"@type": "Answer", "text": "できます。作品の権利はすべて描いた人のものです。ソフト本体の再配布・転売はできません。"}},
+        {"@type": "Question", "name": "アップデートは有料ですか？", "acceptedAnswer": {"@type": "Answer", "text": "1.x系のアップデートは、購入済みの方なら追加費用なしで最新ファイルをダウンロードし直せます。"}}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/icon-192.png" alt="" width="28" height="28">Nishikie Lab</a>
+    <ul>
+      <li><a href="#features">特長</a></li>
+      <li><a href="#motion">動きで見る</a></li>
+      <li><a href="#spec">動作環境</a></li>
+      <li><a href="#get">入手</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+    <a class="lang" href="en/" hreflang="en" lang="en">English</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" aria-label="Nishikie Lab の紹介">
+  <canvas id="heroGL" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="kicker">シェーダーペイントソフト</span>
+      <h1>
+        <span class="name">Nishikie Lab（錦絵ラボ）</span>
+        <span class="line"><span>ブラシも、紙も、光も、</span></span>
+        <span class="line"><span>ぜんぶシェーダー。</span></span>
+      </h1>
+      <p class="lead">描く道具そのものを作れるペイントソフトです。ブラシの質感も、紙の目も、レイヤーにかかる効果も、すべてGLSLシェーダー。アプリの中で開いて、いじって、自分の道具として保存できます。</p>
+      <ul class="chips">
+        <li>HTMLファイル1個</li><li>インストール不要</li><li>通信なし</li><li>広告なし</li><li>無料版あり</li>
+      </ul>
+      <div class="cta">
+        <a class="btn primary" href="https://eshido.booth.pm/" rel="noopener">BOOTHで入手 <small>無料版／製品版</small></a>
+        <a class="btn ghost" href="check/">動くか確かめる（環境チェック）</a>
+      </div>
+    </div>
+    <figure class="art">
+      <picture>
+        <source type="image/webp" srcset="assets/dragon-480.webp 480w, assets/dragon.webp 800w" sizes="(max-width:860px) 300px, 400px">
+        <img src="assets/dragon.jpg" width="800" height="1217" alt="Nishikie Labで描いた作例：月と雲のあいだを昇る緑の龍と、足もとに咲く杜若の和風イラスト" fetchpriority="high">
+      </picture>
+      <figcaption>作例「龍」— すべて Nishikie Lab で手描き</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">壱 — FEATURES</div>
+      <h2>道具を、描きながら作る。</h2>
+      <p>ふつうのペイントソフトは用意されたブラシを選ぶところまで。Nishikie Lab は、その先の「ブラシの中身」まで手が届きます。</p>
+    </div>
+
+    <article class="feature rv">
+      <div class="media"><img src="assets/f-distance.webp" width="1280" height="720" loading="lazy" alt="スタンプを並べる普通のブラシと、ひと続きの距離場で描くNishikie Labの線の比較"></div>
+      <div>
+        <h3><span class="tag">ひと筆＝ひとつの距離場</span>線がどう曲がっても、質感が追いかける。</h3>
+        <p>点を並べるスタンプ式ではなく、ひと筆をまるごと「距離場」として扱います。曲がり角でも継ぎ目が出ず、質感が線に沿って流れます。</p>
+        <p>入り・抜き、手ブレ補正、混色、かすれ（飛白）にも対応した筆圧ブラシです。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><img src="assets/f-code.webp" width="1280" height="720" loading="lazy" alt="金箔を散らすブラシのGLSLコードを、アプリ内エディタで開いているところ"></div>
+      <div>
+        <h3><span class="tag">ブラシは読めるコード</span>数字を1個変えれば、別の筆になる。</h3>
+        <p>内蔵ブラシはどれもGLSLのコードとして開けます。スライダーでつまみを動かすのも、コードを書き換えるのも自由。気に入ったら自分のブラシとして保存し、ライブサムネイルの「棚」で管理できます。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><img src="assets/f-ai.webp" width="1280" height="720" loading="lazy" alt="AIチャットにブラシを頼み、返ってきたコードを貼り付けて描く3ステップ"></div>
+      <div>
+        <h3><span class="tag">AIに頼んでブラシを作る</span>頼む → 貼る → 描く。</h3>
+        <p>「AIに頼む用のテンプレ」をコピーして、お使いのAIチャットに作りたいブラシを書くだけ。返ってきたコードを貼り付ければ、そのまま動くブラシやマテリアルになります。コードが書けなくても道具を増やせます。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><img src="assets/f-materials.webp" width="1280" height="720" loading="lazy" alt="同じ絵にハーフトーン、輪郭線、紙の地、ボロノイ、疑似ライティングのマテリアルをかけた比較"></div>
+      <div>
+        <h3><span class="tag">レイヤーマテリアル</span>効果は、あとから何度でも変えられる。</h3>
+        <p>ハーフトーン、輪郭線、紙の地、ボロノイ、疑似ライティング……。レイヤーの見た目をシェーダーで丸ごと差し替えます。非破壊なので、描いたあとでも数値ひとつで調整できます。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><video data-auto muted loop playsinline preload="none" poster="assets/f-depth.webp" width="1280" height="720" aria-label="深度マップで絵に立体的な光が当たる様子"><source src="assets/f-depth.mp4" type="video/mp4"></video></div>
+      <div>
+        <h3><span class="tag">深度と光</span>平面の絵に、奥行きの光を。</h3>
+        <p>レイヤーに深度を持たせて、立体的なライティングをかけられます。光の向きを動かすと、盛り上がった絵の具のように陰影が変わります。</p>
+      </div>
+    </article>
+
+    <ul class="list rv">
+      <li><b>レイヤー／フォルダ</b>、クリッピング、マスク、豊富なブレンドモード</li>
+      <li><b>ベクターレイヤー</b>：描いたあとから線ごと編集・ブラシ差し替え</li>
+      <li><b>文字レイヤー</b>（縦書き対応）</li>
+      <li><b>選択範囲</b>：自動選択・拡張／収縮／ぼかし</li>
+      <li><b>ゆがみ・四隅変形・グリッド変形</b></li>
+      <li><b>バケツ塗りの隙間閉じ</b>、はみ出し防止</li>
+      <li><b>PSD入出力</b>（レイヤー保持）、PNG／WebP／JPEG書き出し</li>
+      <li><b>CMYKプレビュー</b>（ICCプロファイル）</li>
+      <li><b>タイムラプス記録</b>（MP4で書き出し）</li>
+      <li><b>UIのテーマ</b>までシェーダーで描き替え可能</li>
+    </ul>
+  </div>
+</section>
+
+<section id="motion" class="alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">弐 — IN MOTION</div>
+      <h2>動きで見る。</h2>
+      <p>最近のアップデートで入った機能から。画面に入ると再生されます。</p>
+    </div>
+    <div class="grid4">
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="assets/v-mix.webp" aria-label="混色の動画"><source src="assets/v-mix.mp4" type="video/mp4"></video><figcaption><b>混色</b><span>下の色を拾いながら伸びる筆</span></figcaption></figure>
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="assets/v-stipple.webp" aria-label="点描ブラシの動画"><source src="assets/v-stipple.mp4" type="video/mp4"></video><figcaption><b>点描（指向性）</b><span>粒が線の向きに沿って並ぶ</span></figcaption></figure>
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="assets/v-grid.webp" aria-label="グリッド変形の動画"><source src="assets/v-grid.mp4" type="video/mp4"></video><figcaption><b>グリッド変形</b><span>マス目で、なめらかに曲げる</span></figcaption></figure>
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="assets/v-spill.webp" aria-label="はみ出し防止の動画"><source src="assets/v-spill.mp4" type="video/mp4"></video><figcaption><b>はみ出し防止</b><span>線画の内側だけに塗る</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap works">
+    <img class="rv" src="assets/eshido.webp" width="1500" height="500" loading="lazy" alt="絵師堂 Eshido のロゴと、大筆を構える女性の墨絵">
+    <div class="rv">
+      <div class="sec-head" style="margin:0">
+        <div class="num">参 — BY A PAINTER</div>
+        <h2>絵描きが、自分のために作った。</h2>
+        <p>Nishikie Lab は、絵師堂（Eshido）の NAO が自分の絵のために作り続けているソフトです。使う人から届いた声は、作者が直接読んで次の版に入れています。作品を投稿するときは <b>#NishikieLab</b> を付けてもらえたら見に行きます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spec" class="alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">肆 — REQUIREMENTS</div>
+      <h2>動作環境</h2>
+      <p>買う前に、お使いのパソコンで動くかをその場で確かめられます。</p>
+    </div>
+    <div class="spec">
+      <table class="rv">
+        <tr><th>OS</th><td>Windows／macOS／Linux</td></tr>
+        <tr><th>ブラウザ</th><td>WebGL2 に対応した最近の Chrome／Edge／Firefox／Safari（Chrome・Edge 推奨）</td></tr>
+        <tr><th>GPU</th><td>グラフィックボード不要。2012年以降のCPU内蔵GPU（Intel HD 4000、AMD APU、Apple Mシリーズなど）で動作</td></tr>
+        <tr><th>メモリ</th><td>レイヤー1枚＝幅×高さ×8バイト（4000×4000で約128MB）。大きなキャンバスを多層で使うなら16GB以上が安心</td></tr>
+        <tr><th>通信</th><td>標準の状態では一切なし。描いたものは外へ送られません</td></tr>
+      </table>
+      <div class="rv">
+        <img src="assets/f-specs.webp" width="1280" height="720" loading="lazy" alt="対応OS、グラフィックボード不要、16bitフロートレイヤーなどの仕様まとめ" style="border-radius:12px;box-shadow:var(--shadow)">
+        <p style="margin:18px 0 0"><a class="btn ghost" href="check/">環境チェックを開く</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="get">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">伍 — GET IT</div>
+      <h2>入手する</h2>
+      <p>まず無料版で描き味を試して、気に入ったら製品版へ。</p>
+    </div>
+    <div class="plans">
+      <div class="plan rv">
+        <h3>無料版</h3>
+        <div class="price">¥0</div>
+        <ul><li>描く機能は製品版と同じ</li><li>保存・書き出しはできません</li><li>「画像をコピー」でSNSに貼れます</li></ul>
+        <a class="btn ghost" href="https://eshido.booth.pm/" rel="noopener">BOOTHで受け取る</a>
+      </div>
+      <div class="plan main rv" data-badge="おすすめ">
+        <h3>製品版</h3>
+        <div class="price">¥500 <small>税込・買い切り</small></div>
+        <ul><li>プロジェクト保存・PSD/PNG書き出し・自動バックアップ</li><li>1.x系のアップデートは追加費用なし</li><li>おまけブラシパック付き</li></ul>
+        <a class="btn primary" href="https://eshido.booth.pm/" rel="noopener">BOOTHで購入</a>
+      </div>
+      <div class="plan rv" lang="en">
+        <h3>English edition</h3>
+        <div class="price">Gumroad</div>
+        <ul><li>Same features as the Japanese edition</li><li>English UI and manual</li><li>Free updates for 1.x</li></ul>
+        <a class="btn ghost" href="https://naocraft5.gumroad.com/" rel="noopener">Get it on Gumroad</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap" style="max-width:820px">
+    <div class="sec-head rv">
+      <div class="num">陸 — FAQ</div>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>インストールは必要ですか？</summary><p>不要です。同梱のHTMLファイル1個をダブルクリックすると、ブラウザで開いてすぐ描き始められます。タブやアドレスバーの無い「アプリの窓」で開くランチャーも同梱しています。</p></details>
+      <details><summary>無料版と製品版の違いは？</summary><p>描く機能は同じです。無料版はプロジェクト保存・PNG/PSD書き出し・自動バックアップができません。描いた絵は「画像をコピー」でSNSなどに貼り付けられます。</p></details>
+      <details><summary>グラフィックボードは必要ですか？</summary><p>不要です。2012年以降のCPU内蔵GPUで動きます。WebGL2対応のブラウザが必要です。心配なときは<a href="check/">環境チェック</a>で確かめてください。</p></details>
+      <details><summary>描いた絵はインターネットに送られますか？</summary><p>送られません。標準の状態ではインターネットとの通信を行わず、広告もありません。</p></details>
+      <details><summary>描いた作品を商用利用できますか？</summary><p>できます。作品の権利はすべて描いた人のものです。ソフト本体の再配布・転売はできません。</p></details>
+      <details><summary>アップデートは有料ですか？</summary><p>1.x系のアップデートは、購入済みの方なら追加費用なしで最新ファイルをダウンロードし直せます。</p></details>
+      <details><summary>不具合や要望はどこへ？</summary><p>X（旧Twitter）の <a href="https://x.com/nao3art" rel="noopener">@nao3art</a> へ、メンションでもDMでもどうぞ。作者が直接読みます。環境チェックの結果を添えてもらえると調査が早く進みます。</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/logo.png" width="448" height="56" alt="Nishikie Lab" style="height:40px">
+    <div>
+      <a href="https://x.com/nao3art" rel="noopener">X @nao3art</a> ・
+      <a href="https://eshido.booth.pm/" rel="noopener">BOOTH</a> ・
+      <a href="https://naocraft5.gumroad.com/" rel="noopener">Gumroad</a> ・
+      <a href="check/">環境チェック</a> ・
+      <a href="en/" hreflang="en">English</a>
+    </div>
+    <div>© 2026 NAO ／ 絵師堂 (Eshido)</div>
+  </div>
+</footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

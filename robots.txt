@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://naocgart-sudo.github.io/nishikie-lab/sitemap.xml

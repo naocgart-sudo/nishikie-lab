@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nishikie Lab — Shader-native paint app that runs in your browser, no install</title>
+<meta name="description" content="Nishikie Lab is a paint app where every brush, paper texture and layer effect is a GLSL shader you can edit. A single HTML file that runs in your browser: no install, no account, no network, no ads. Free edition available.">
+<link rel="canonical" href="https://naocgart-sudo.github.io/nishikie-lab/en/">
+<link rel="alternate" hreflang="ja" href="https://naocgart-sudo.github.io/nishikie-lab/">
+<link rel="alternate" hreflang="en" href="https://naocgart-sudo.github.io/nishikie-lab/en/">
+<link rel="alternate" hreflang="x-default" href="https://naocgart-sudo.github.io/nishikie-lab/en/">
+<meta name="theme-color" content="#f3ede2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14171d" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nishikie Lab">
+<meta property="og:title" content="Nishikie Lab — Every brush, paper and effect is a shader.">
+<meta property="og:description" content="A paint app in one HTML file. No install, no network. Write your own brushes. Free edition available.">
+<meta property="og:url" content="https://naocgart-sudo.github.io/nishikie-lab/en/">
+<meta property="og:image" content="https://naocgart-sudo.github.io/nishikie-lab/assets/og-en.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nao3art"><meta name="twitter:creator" content="@nao3art">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>:root{--serif:"Fraunces",Georgia,serif;--sans:"Inter",system-ui,sans-serif}body{line-height:1.7}</style>
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="preload" as="image" href="../assets/dragon.webp">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://naocgart-sudo.github.io/nishikie-lab/#app",
+      "name": "Nishikie Lab",
+      "description": "A paint app where brushes, paper and layer effects are all GLSL shaders you can edit. Runs from a single HTML file in your browser, with no install and no network access.",
+      "applicationCategory": "DesignApplication",
+      "applicationSubCategory": "Painting software",
+      "operatingSystem": "Windows, macOS, Linux (WebGL2 browser)",
+      "inLanguage": ["en", "ja"],
+      "image": "https://naocgart-sudo.github.io/nishikie-lab/assets/og-en.jpg",
+      "screenshot": "https://naocgart-sudo.github.io/nishikie-lab/assets/f-code.webp",
+      "url": "https://naocgart-sudo.github.io/nishikie-lab/en/",
+      "author": {"@type": "Organization", "name": "Eshido", "sameAs": ["https://x.com/nao3art", "https://naocraft5.gumroad.com/", "https://eshido.booth.pm/"]},
+      "offers": [
+        {"@type": "Offer", "name": "Full edition (Gumroad)", "price": "16", "priceCurrency": "USD", "url": "https://naocraft5.gumroad.com/", "availability": "https://schema.org/InStock"},
+        {"@type": "Offer", "name": "Free edition (no saving)", "price": "0", "priceCurrency": "USD", "url": "https://naocraft5.gumroad.com/", "availability": "https://schema.org/InStock"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Do I need to install anything?", "acceptedAnswer": {"@type": "Answer", "text": "No. Double-click the included HTML file and it opens in your browser, ready to paint."}},
+        {"@type": "Question", "name": "What is the difference between the free and full editions?", "acceptedAnswer": {"@type": "Answer", "text": "Painting features are identical. The free edition cannot save projects, export PNG/PSD or keep automatic backups. You can still copy the image to the clipboard and paste it anywhere."}},
+        {"@type": "Question", "name": "Do I need a graphics card?", "acceptedAnswer": {"@type": "Answer", "text": "No. Integrated GPUs from 2012 onward (Intel HD 4000, AMD APUs, Apple M-series) work fine. A browser with WebGL2 is required."}},
+        {"@type": "Question", "name": "Is my artwork sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. By default the app never connects to the internet, and there are no ads or telemetry."}},
+        {"@type": "Question", "name": "Can I use my artwork commercially?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Artwork you create is entirely yours. Redistributing the app itself is not permitted."}},
+        {"@type": "Question", "name": "Are updates free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. 1.x updates are free for existing customers: just download the latest file again."}}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../assets/icon-192.png" alt="" width="28" height="28">Nishikie Lab</a>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#motion">In motion</a></li>
+      <li><a href="#spec">Requirements</a></li>
+      <li><a href="#get">Get it</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="lang" href="../" hreflang="ja" lang="ja">日本語</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" aria-label="About Nishikie Lab">
+  <canvas id="heroGL" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="kicker">SHADER-NATIVE PAINT APP</span>
+      <h1>
+        <span class="name">Nishikie Lab</span>
+        <span class="line"><span>Every brush, paper</span></span>
+        <span class="line"><span>and effect is a shader.</span></span>
+      </h1>
+      <p class="lead">A paint app where the tools themselves are programmable. Brushes, paper textures and layer effects are all GLSL shaders — open them in the built-in editor, tweak them, and save them as your own tools.</p>
+      <ul class="chips">
+        <li>One HTML file</li><li>No install</li><li>No network</li><li>No ads</li><li>Free edition</li>
+      </ul>
+      <div class="cta">
+        <a class="btn primary" href="https://naocraft5.gumroad.com/" rel="noopener">Get it on Gumroad <small>free / full</small></a>
+        <a class="btn ghost" href="check/">Will it run? (compatibility check)</a>
+      </div>
+    </div>
+    <figure class="art">
+      <picture>
+        <source type="image/webp" srcset="../assets/dragon-480.webp 480w, ../assets/dragon.webp 800w" sizes="(max-width:860px) 300px, 400px">
+        <img src="../assets/dragon.jpg" width="800" height="1217" alt="Sample artwork painted in Nishikie Lab: a green dragon rising between the moon and clouds above blue irises, in a Japanese style" fetchpriority="high">
+      </picture>
+      <figcaption>“Dragon” — hand-painted entirely in Nishikie Lab</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">01 — FEATURES</div>
+      <h2>Make your tools while you paint.</h2>
+      <p>Most paint apps stop at letting you pick a brush. Nishikie Lab lets you reach inside it.</p>
+    </div>
+
+    <article class="feature rv">
+      <div class="media"><img src="../assets/f-distance.webp" width="1280" height="720" loading="lazy" alt="Comparison of an ordinary stamped brush and Nishikie Lab's single distance-field stroke"></div>
+      <div>
+        <h3><span class="tag">ONE STROKE, ONE DISTANCE FIELD</span>Textures follow the line, however it bends.</h3>
+        <p>Instead of a row of stamps, each stroke is treated as a single distance field. No seams at corners — the texture flows along the line.</p>
+        <p>Pressure-sensitive, with natural tapering, stabilizer, color mixing and dry-brush streaks.</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><img src="../assets/f-code.webp" width="1280" height="720" loading="lazy" alt="The GLSL code of a gold-leaf brush open in the in-app editor"></div>
+      <div>
+        <h3><span class="tag">EVERY BRUSH IS CODE YOU CAN READ</span>Change one number, get a new brush.</h3>
+        <p>Open any built-in brush as GLSL. Drag the sliders or rewrite the code, then save it as your own and keep it on a live-thumbnail shelf.</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><img src="../assets/f-ai.webp" width="1280" height="720" loading="lazy" alt="Three steps: ask an AI chat for a brush, paste the code, paint"></div>
+      <div>
+        <h3><span class="tag">ASK AN AI FOR A BRUSH</span>Ask. Paste. Paint.</h3>
+        <p>Copy the built-in prompt template into your favorite AI chat and describe the brush you want. Paste the code it returns and you have a working brush or material — no coding required.</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><img src="../assets/f-materials.webp" width="1280" height="720" loading="lazy" alt="The same painting with halftone, outline, paper ground, Voronoi and pseudo-lighting materials"></div>
+      <div>
+        <h3><span class="tag">LAYER MATERIALS</span>Effects you can change later.</h3>
+        <p>Halftone, outline, paper grain, Voronoi dissolve, pseudo-lighting — swap a layer's whole look with a shader. Non-destructive, all numbers, adjustable any time.</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><video data-auto muted loop playsinline preload="none" poster="../assets/f-depth.webp" width="1280" height="720" aria-label="Depth-based lighting moving across a painting"><source src="../assets/f-depth.mp4" type="video/mp4"></video></div>
+      <div>
+        <h3><span class="tag">DEPTH &amp; LIGHT</span>Give a flat painting real relief.</h3>
+        <p>Add depth to a layer and light it in 3D. Move the light and the shading shifts like thick paint on canvas.</p>
+      </div>
+    </article>
+
+    <ul class="list rv">
+      <li><b>Layers &amp; folders</b>, clipping, masks, a full set of blend modes</li>
+      <li><b>Vector layers</b>: edit strokes after drawing, swap brushes per stroke</li>
+      <li><b>Text layers</b>, including vertical text</li>
+      <li><b>Selections</b>: magic wand, grow / shrink / feather</li>
+      <li><b>Warp, corner-pin and grid transform</b></li>
+      <li><b>Gap-closing bucket fill</b> and paint-inside-lines</li>
+      <li><b>PSD import/export</b> (layers kept), PNG / WebP / JPEG export</li>
+      <li><b>CMYK preview</b> with ICC profiles</li>
+      <li><b>Time-lapse recording</b>, exported as MP4</li>
+      <li>Even the <b>UI theme</b> is shader-driven</li>
+    </ul>
+  </div>
+</section>
+
+<section id="motion" class="alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">02 — IN MOTION</div>
+      <h2>See it move.</h2>
+      <p>From recent updates. Clips play when they scroll into view.</p>
+    </div>
+    <div class="grid4">
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="../assets/v-mix.webp" aria-label="Color mixing"><source src="../assets/v-mix.mp4" type="video/mp4"></video><figcaption><b>Color mixing</b><span>The brush picks up the paint below</span></figcaption></figure>
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="../assets/v-stipple.webp" aria-label="Directional stipple brush"><source src="../assets/v-stipple.mp4" type="video/mp4"></video><figcaption><b>Directional stipple</b><span>Dots line up along the stroke</span></figcaption></figure>
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="../assets/v-grid.webp" aria-label="Grid transform"><source src="../assets/v-grid.mp4" type="video/mp4"></video><figcaption><b>Grid transform</b><span>Bend smoothly with a mesh</span></figcaption></figure>
+      <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="../assets/v-spill.webp" aria-label="Paint inside the lines"><source src="../assets/v-spill.mp4" type="video/mp4"></video><figcaption><b>Stay inside the lines</b><span>Paint only within your line art</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap works">
+    <img class="rv" src="../assets/eshido.webp" width="1500" height="500" loading="lazy" alt="Eshido logo with an ink drawing of a woman holding a large brush">
+    <div class="rv">
+      <div class="sec-head" style="margin:0">
+        <div class="num">03 — BY A PAINTER</div>
+        <h2>Made by a painter, for painting.</h2>
+        <p>Nishikie Lab is built by NAO of Eshido, a painter making the tool for his own work. Feedback goes straight to the developer and into the next version. Share your work with <b>#NishikieLab</b> — I'd love to see it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spec" class="alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">04 — REQUIREMENTS</div>
+      <h2>Requirements</h2>
+      <p>Check on the spot whether your computer can run it — before you buy.</p>
+    </div>
+    <div class="spec">
+      <table class="rv">
+        <tr><th>OS</th><td>Windows / macOS / Linux</td></tr>
+        <tr><th>Browser</th><td>A recent Chrome / Edge / Firefox / Safari with WebGL2 (Chrome or Edge recommended)</td></tr>
+        <tr><th>GPU</th><td>No graphics card needed. Integrated GPUs from 2012 onward (Intel HD 4000, AMD APUs, Apple M-series)</td></tr>
+        <tr><th>Memory</th><td>Each layer uses width × height × 8 bytes (about 128 MB at 4000 × 4000). 16 GB RAM recommended for large multi-layer canvases</td></tr>
+        <tr><th>Network</th><td>None by default. Nothing you draw ever leaves your machine</td></tr>
+      </table>
+      <div class="rv">
+        <img src="../assets/f-specs.webp" width="1280" height="720" loading="lazy" alt="Spec summary: Windows, macOS and Linux, no graphics card needed, 16-bit float layers" style="border-radius:12px;box-shadow:var(--shadow)">
+        <p style="margin:18px 0 0"><a class="btn ghost" href="check/">Open the compatibility check</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="get">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">05 — GET IT</div>
+      <h2>Get Nishikie Lab</h2>
+      <p>Try the free edition first. If you like how it paints, upgrade to the full edition.</p>
+    </div>
+    <div class="plans">
+      <div class="plan rv">
+        <h3>Free edition</h3>
+        <div class="price">$0</div>
+        <ul><li>Same painting features as the full edition</li><li>No saving or exporting</li><li>“Copy image” to paste your work anywhere</li></ul>
+        <a class="btn ghost" href="https://naocraft5.gumroad.com/" rel="noopener">Get the free edition</a>
+      </div>
+      <div class="plan main rv" data-badge="Recommended">
+        <h3>Full edition</h3>
+        <div class="price">$16 <small>one-time</small></div>
+        <ul><li>Save projects, export PSD / PNG, automatic backups</li><li>Free 1.x updates</li><li>Bonus brush pack included</li></ul>
+        <a class="btn primary" href="https://naocraft5.gumroad.com/" rel="noopener">Buy on Gumroad</a>
+      </div>
+      <div class="plan rv" lang="ja">
+        <h3>日本語版</h3>
+        <div class="price">BOOTH</div>
+        <ul><li>機能は英語版と同じ</li><li>日本語UI・説明書</li><li>1.x系のアップデート無料</li></ul>
+        <a class="btn ghost" href="https://eshido.booth.pm/" rel="noopener">BOOTHで見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap" style="max-width:820px">
+    <div class="sec-head rv">
+      <div class="num">06 — FAQ</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>Do I need to install anything?</summary><p>No. Double-click the included HTML file and it opens in your browser, ready to paint. A launcher that opens it in a tab-less “app window” is included too.</p></details>
+      <details><summary>What is the difference between the free and full editions?</summary><p>Painting features are identical. The free edition cannot save projects, export PNG/PSD or keep automatic backups. You can still copy the image to the clipboard and paste it anywhere.</p></details>
+      <details><summary>Do I need a graphics card?</summary><p>No. Integrated GPUs from 2012 onward work fine. You need a browser with WebGL2 — run the <a href="check/">compatibility check</a> if you're unsure.</p></details>
+      <details><summary>Is my artwork sent anywhere?</summary><p>No. By default the app never connects to the internet. No ads, no account, no telemetry.</p></details>
+      <details><summary>Can I use my artwork commercially?</summary><p>Yes. Artwork you create is entirely yours. Redistributing the app itself is not permitted.</p></details>
+      <details><summary>Are updates free?</summary><p>Yes. 1.x updates are free for existing customers — just download the latest file again.</p></details>
+      <details><summary>Where do I send bug reports or requests?</summary><p>Mention or DM <a href="https://x.com/nao3art" rel="noopener">@nao3art</a> on X. The developer reads every message. Attaching your compatibility-check result helps a lot.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="../assets/logo.png" width="448" height="56" alt="Nishikie Lab" style="height:40px">
+    <div>
+      <a href="https://x.com/nao3art" rel="noopener">X @nao3art</a> ·
+      <a href="https://naocraft5.gumroad.com/" rel="noopener">Gumroad</a> ·
+      <a href="https://eshido.booth.pm/" rel="noopener">BOOTH</a> ·
+      <a href="check/">Compatibility check</a> ·
+      <a href="../" hreflang="ja">日本語</a>
+    </div>
+    <div>© 2026 NAO / Eshido</div>
+  </div>
+</footer>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>

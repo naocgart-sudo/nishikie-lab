@@ -1,0 +1,26 @@
+[
+  {
+    "file": "v-mix.mp4",
+    "poster": "v-mix.webp",
+    "ja": { "title": "混色", "desc": "下の色を拾いながら伸びる筆" },
+    "en": { "title": "Color mixing", "desc": "The brush picks up the paint below" }
+  },
+  {
+    "file": "v-stipple.mp4",
+    "poster": "v-stipple.webp",
+    "ja": { "title": "点描（指向性）", "desc": "粒が線の向きに沿って並ぶ" },
+    "en": { "title": "Directional stipple", "desc": "Dots line up along the stroke" }
+  },
+  {
+    "file": "v-grid.mp4",
+    "poster": "v-grid.webp",
+    "ja": { "title": "グリッド変形", "desc": "マス目で、なめらかに曲げる" },
+    "en": { "title": "Grid transform", "desc": "Bend smoothly with a mesh" }
+  },
+  {
+    "file": "v-spill.mp4",
+    "poster": "v-spill.webp",
+    "ja": { "title": "はみ出し防止", "desc": "線画の内側だけに塗る" },
+    "en": { "title": "Stay inside the lines", "desc": "Paint only within your line art" }
+  }
+]

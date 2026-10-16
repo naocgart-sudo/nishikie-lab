@@ -37,6 +37,13 @@ GitHub のこの画面だけで更新できます。保存（Commit）してか�
 | レイヤーマテリアル | `assets/f-materials.webp` |
 | 深度と光（動画） | `assets/f-depth.mp4`（再生前の絵: `f-depth.webp`） |
 | 動作環境の図 | `assets/f-specs.webp` |
+| 筆えらび（動画） | `assets/f-picker.mp4`（再生前の絵: `f-picker.webp`） |
+| テクスチャ筆（動画） | `assets/f-texbrush.mp4`（再生前の絵: `f-texbrush.webp`）※英語版は字幕なしの `f-ribbon.mp4` のまま |
+| ベクターの線画（動画・正方形） | `assets/f-vecwarp.mp4`（再生前の絵: `f-vecwarp.webp`） |
+| 混色 — 絵の具のように（動画） | `assets/f-pigment.mp4`（再生前の絵: `f-pigment.webp`） |
+| UIテーマ | `assets/f-theme.webp` |
+| 開発中: 水彩の筆（動画・3:2） | `assets/w-watercolor.mp4`（再生前の絵: `w-watercolor.webp`） |
+| モバイル版のスクリーンショット（3枚） | `assets/m-1.webp` `m-2.webp` `m-3.webp`（縦長。9:19.5 で切り抜かれて表示されるので、縦長ならどんな比率でも可） |
 | トップの作例 | `assets/dragon.webp` `assets/dragon-480.webp` `assets/dragon.jpg` |
 | SNSで共有したときの画像 | `assets/og.jpg`（日本語）`assets/og-en.jpg`（英語）1200×630 |
 
@@ -47,6 +54,17 @@ GitHub のこの画面だけで更新できます。保存（Commit）してか�
 - 動画: 16:9、横1280px、10秒前後、**1本5MB以下**（音は鳴りません。ループ再生）
 - 画像: 16:9、横1280px、.webp がいちばん軽い
 - 1回のアップロードは合計25MBまで（GitHubの制限）
+
+## モバイル版のスクリーンショットを差し替える
+
+`assets/m-1.webp` `m-2.webp` `m-3.webp` を同じ名前で上げ直すだけです（.png でも可。その場合は `index.html` と `en/index.html` の `m-1.webp` を `m-1.png` に書き換える）。
+実機のスクリーンショットをそのまま上げてかまいません。スマホの枠の中に収まるよう中央で切り抜かれます。
+文章（「開発中」の説明）は `index.html` の `<section id="mobile">` にあります。モバイル版と水彩の筆の2つが `<div class="wip">` ずつ並んでいます。開発中の話題を足すときは `wip` のかたまりを1つコピーして書き換えます（左右は自動で交互になります）。
+
+## 更新履歴を足すとき
+
+`index.html` の `<div class="updates">` の `<dl>` に `<dt>バージョン <span>年月</span></dt><dd>内容</dd>` を1組足す（英語は `en/index.html` の同じ場所）。
+検索エンジン向けの `"softwareVersion"` と `"dateModified"`（`<head>` の中）も合わせて直す。
 
 ## 価格を変えるとき
 

@@ -2,25 +2,73 @@
   {
     "file": "v-mix.mp4",
     "poster": "v-mix.webp",
-    "ja": { "title": "混色", "desc": "下の色を拾いながら伸びる筆" },
-    "en": { "title": "Color mixing", "desc": "The brush picks up the paint below" }
+    "ja": {
+      "title": "混色",
+      "desc": "下の色を拾いながら伸びる筆"
+    },
+    "en": {
+      "title": "Color mixing",
+      "desc": "The brush picks up the paint below"
+    }
   },
   {
     "file": "v-stipple.mp4",
     "poster": "v-stipple.webp",
-    "ja": { "title": "点描（指向性）", "desc": "粒が線の向きに沿って並ぶ" },
-    "en": { "title": "Directional stipple", "desc": "Dots line up along the stroke" }
+    "ja": {
+      "title": "点描（指向性）",
+      "desc": "粒が線の向きに沿って並ぶ"
+    },
+    "en": {
+      "title": "Directional stipple",
+      "desc": "Dots line up along the stroke"
+    }
   },
   {
     "file": "v-grid.mp4",
     "poster": "v-grid.webp",
-    "ja": { "title": "グリッド変形", "desc": "マス目で、なめらかに曲げる" },
-    "en": { "title": "Grid transform", "desc": "Bend smoothly with a mesh" }
+    "ja": {
+      "title": "グリッド変形",
+      "desc": "マス目で、なめらかに曲げる"
+    },
+    "en": {
+      "title": "Grid transform",
+      "desc": "Bend smoothly with a mesh"
+    }
   },
   {
     "file": "v-spill.mp4",
     "poster": "v-spill.webp",
-    "ja": { "title": "はみ出し防止", "desc": "線画の内側だけに塗る" },
-    "en": { "title": "Stay inside the lines", "desc": "Paint only within your line art" }
+    "ja": {
+      "title": "はみ出し防止",
+      "desc": "線画の内側だけに塗る"
+    },
+    "en": {
+      "title": "Stay inside the lines",
+      "desc": "Paint only within your line art"
+    }
+  },
+  {
+    "file": "v-vec.mp4",
+    "poster": "v-vec.webp",
+    "ja": {
+      "title": "ベクターの消しゴム",
+      "desc": "1回のタッチで線ごと消える"
+    },
+    "en": {
+      "title": "Vector eraser",
+      "desc": "One tap removes the whole stroke"
+    }
+  },
+  {
+    "file": "v-stab.mp4",
+    "poster": "v-stab.webp",
+    "ja": {
+      "title": "手ブレ補正",
+      "desc": "同じ震えた入力を 0 と 90 で"
+    },
+    "en": {
+      "title": "Stabilizer",
+      "desc": "The same shaky input at 0 and 90"
+    }
   }
 ]

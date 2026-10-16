@@ -44,6 +44,8 @@
       "description": "ブラシ・紙・レイヤー効果がすべてGLSLシェーダーでできたペイントソフト。HTMLファイル1個をブラウザで開くだけで動き、インストール不要・通信なし。",
       "applicationCategory": "DesignApplication",
       "applicationSubCategory": "ペイントソフト",
+      "softwareVersion": "1.05",
+      "dateModified": "2026-10-16",
       "operatingSystem": "Windows, macOS, Linux（WebGL2対応ブラウザ）",
       "inLanguage": ["ja", "en"],
       "image": "https://naocgart-sudo.github.io/nishikie-lab/assets/og.jpg",
@@ -86,6 +88,7 @@
     <ul>
       <li><a href="#features">特長</a></li>
       <li><a href="#motion">動きで見る</a></li>
+      <li><a href="#mobile">開発中</a></li>
       <li><a href="#spec">動作環境</a></li>
       <li><a href="#get">入手</a></li>
       <li><a href="#faq">よくある質問</a></li>
@@ -99,7 +102,7 @@
   <canvas id="heroGL" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
-      <span class="kicker">シェーダーペイントソフト</span>
+      <span class="kicker">シェーダーペイントソフト <em class="ver">最新 1.05</em></span>
       <h1>
         <span class="name">Nishikie Lab（錦絵ラボ）</span>
         <span class="line"><span>ブラシも、紙も、光も、</span></span>
@@ -107,7 +110,7 @@
       </h1>
       <p class="lead">描く道具そのものを作れるペイントソフトです。ブラシの質感も、紙の目も、レイヤーにかかる効果も、すべてGLSLシェーダー。アプリの中で開いて、いじって、自分の道具として保存できます。</p>
       <ul class="chips">
-        <li>HTMLファイル1個</li><li>インストール不要</li><li>通信なし</li><li>広告なし</li><li>無料版あり</li>
+        <li>HTMLファイル1個</li><li>インストール不要</li><li>買い切り</li><li>オフラインで使える</li><li>広告なし</li><li>無料版あり</li>
       </ul>
       <div class="cta">
         <a class="btn primary" href="https://eshido.booth.pm/" rel="noopener">BOOTHで入手 <small>無料版／製品版</small></a>
@@ -158,6 +161,33 @@
     </article>
 
     <article class="feature rv">
+      <div class="media"><video data-auto muted loop playsinline preload="none" poster="assets/f-picker.webp" width="1280" height="720" aria-label="筆えらびの一覧から筆を選ぶたびに、描き味が変わる様子"><source src="assets/f-picker.mp4" type="video/mp4"></video></div>
+      <div>
+        <h3><span class="tag">筆えらび</span>筆は、見て選ぶ。</h3>
+        <p>一覧には、それぞれの筆で実際に描いたストロークが並びます。掃き筆（はらい）、飛白（かすれ）、片ボケ、マルチライン、金箔散らし、ハーフトーン……。選んだ瞬間から描き味が変わります。</p>
+        <p>つまみを調整した状態は「筆名」を付けて保存。お気に入りと棚で整理でき、<b>.nlbrush</b> ファイルに書き出して人に渡せます。ツールの長押しでお気に入りの筆を呼び出せます。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><video data-auto muted loop playsinline preload="none" poster="assets/f-texbrush.webp" width="1280" height="720" aria-label="描いたレイヤーをテクスチャスロットへドロップして筆にし、スタンプやリボンで線に沿って並べる様子"><source src="assets/f-texbrush.mp4" type="video/mp4"></video></div>
+      <div>
+        <h3><span class="tag">テクスチャ筆</span>描いた絵を、そのまま筆にする。</h3>
+        <p>レイヤーをテクスチャスロットへドラッグするだけで、その絵が筆のテクスチャになります。<b>リボン</b>は線に沿ってつなげて流し、<b>スタンプ</b>は点々と押し、<b>テクスチャを敷く</b>は面に柄を敷きつめます。</p>
+        <p>角度・範囲・折り返し・端の形まで調整できるので、レース、鎖、花飾り、模様の縁取りが一筆で描けます。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media sq"><video data-auto muted loop playsinline preload="none" poster="assets/f-vecwarp.webp" width="960" height="960" aria-label="ベクターの線画をフォルダごとゆがみツールで変形し、そのあと線の太さや筆の形を変える様子"><source src="assets/f-vecwarp.mp4" type="video/mp4"></video></div>
+      <div>
+        <h3><span class="tag">ベクターの線画</span>ゆがめても、線は線のまま。</h3>
+        <p>線画（ベクター）レイヤーは、フォルダごとゆがみツールをかけると、塗りと一緒に変形します。変形したあとも線のデータは残っているので、そのまま点を動かして直せます。</p>
+        <p>線の太さや筆の形も、描いたあとから差し替えられます。顔の向きを少し変えたい、髪の流れを整えたい、そんなときも線を引き直さずに済みます。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
       <div class="media"><img src="assets/f-materials.webp" width="1280" height="720" loading="lazy" alt="同じ絵にハーフトーン、輪郭線、紙の地、ボロノイ、疑似ライティングのマテリアルをかけた比較"></div>
       <div>
         <h3><span class="tag">レイヤーマテリアル</span>効果は、あとから何度でも変えられる。</h3>
@@ -166,24 +196,46 @@
     </article>
 
     <article class="feature rv">
+      <div class="media"><video data-auto muted loop playsinline preload="none" poster="assets/f-pigment.webp" width="1280" height="720" aria-label="黄色の上に青を混色で重ねると、絵の具方式では緑に、デジタル方式では灰色になる比較"><source src="assets/f-pigment.mp4" type="video/mp4"></video></div>
+      <div>
+        <h3><span class="tag">混色 — 絵の具のように</span>黄と青を混ぜたら、緑になる。</h3>
+        <p>筆で下の色を拾いながら伸ばす「混色」は、方式を選べます。<b>デジタル</b>はRGBを混ぜる光の混色。<b>絵の具</b>は顔料の反射スペクトルで混ぜる（Kubelka–Munk）ので、黄＋青は緑、赤＋青は紫になり、混ぜても濁りにくい。</p>
+        <p>どのブラシでも使えて、下のレイヤーの色を拾う設定もあります。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
       <div class="media"><video data-auto muted loop playsinline preload="none" poster="assets/f-depth.webp" width="1280" height="720" aria-label="深度マップで絵に立体的な光が当たる様子"><source src="assets/f-depth.mp4" type="video/mp4"></video></div>
       <div>
         <h3><span class="tag">深度と光</span>平面の絵に、奥行きの光を。</h3>
         <p>レイヤーに深度を持たせて、立体的なライティングをかけられます。光の向きを動かすと、盛り上がった絵の具のように陰影が変わります。</p>
+        <p>深度は絵の明るさから作るほか、筆で直接描き足すこともできます。できた凹凸は<b>法線マップ</b>としてレイヤーに焼き出せるので、3Dのテクスチャ作りにも。ライトツールで光の向きと傾きを、置いたあとから動かせます。</p>
+      </div>
+    </article>
+
+    <article class="feature rv">
+      <div class="media"><img src="assets/f-theme.webp" width="1280" height="720" loading="lazy" alt="同じ画面を桜和紙テーマとダークテーマで表示した比較"></div>
+      <div>
+        <h3><span class="tag">UIテーマ</span>道具箱の見た目も、好みで。</h3>
+        <p>標準は和紙にほんのり桜色の「桜和紙」。落ち着いた「ダーク」「ライト」、和紙と和柄をシェーダーで描く「錦」も選べます。アクセントの色や見出しの色は個別に変えられ、UIの下地そのものをGLSLで自作することもできます。</p>
       </div>
     </article>
 
     <ul class="list rv">
-      <li><b>レイヤー／フォルダ</b>、クリッピング、マスク、豊富なブレンドモード</li>
-      <li><b>ベクターレイヤー</b>：描いたあとから線ごと編集・ブラシ差し替え</li>
+      <li><b>筆圧ブラシ</b>：入り・抜き、速さで太さ、最小の太さ、手ブレ補正</li>
+      <li><b>レイヤー／フォルダ</b>、クリッピング、マスク、豊富なブレンドモード、フォルダへのドラッグ&amp;ドロップ</li>
+      <li><b>ベクターレイヤー</b>：線ごと消す消しゴム、あとから筆を差し替え、筆圧の整え、ゆがみで塗りと一緒に変形</li>
       <li><b>文字レイヤー</b>（縦書き対応）</li>
-      <li><b>選択範囲</b>：自動選択・拡張／収縮／ぼかし</li>
-      <li><b>ゆがみ・四隅変形・グリッド変形</b></li>
-      <li><b>バケツ塗りの隙間閉じ</b>、はみ出し防止</li>
-      <li><b>PSD入出力</b>（レイヤー保持）、PNG／WebP／JPEG書き出し</li>
-      <li><b>CMYKプレビュー</b>（ICCプロファイル）</li>
+      <li><b>選択範囲</b>：自動選択・図形・拡張／収縮／ぼかし</li>
+      <li><b>変形</b>：移動・拡縮・回転・左右／上下反転・ゆがみ・四隅・グリッド変形</li>
+      <li><b>バケツ塗りの隙間閉じ</b>、はみ出し防止（線画の内側だけに塗る）</li>
+      <li><b>コピースタンプ</b>、ぼかし・のばし・引っ搔き</li>
+      <li><b>対称描画</b>、タイル（継ぎ目なし模様）の確認</li>
+      <li><b>PSD入出力</b>（レイヤー保持・配置）、PNG／WebP／JPEG書き出し、<b>PDF</b>の書き出し・読み込み（画像として）</li>
+      <li><b>CMYKプレビュー</b>（ICCプロファイル）、dpi と塗り足しの管理</li>
       <li><b>タイムラプス記録</b>（MP4で書き出し）</li>
-      <li><b>UIのテーマ</b>までシェーダーで描き替え可能</li>
+      <li><b>ツールの長押しメニュー</b>でモードやお気に入りの筆を切り替え</li>
+      <li><b>UIテーマ</b>：桜和紙／ダーク／ライト／錦、下地はGLSLで自作も</li>
     </ul>
   </div>
 </section>
@@ -193,7 +245,7 @@
     <div class="sec-head rv">
       <div class="num">弐 — IN MOTION</div>
       <h2>動きで見る。</h2>
-      <p>最近のアップデートで入った機能から。画面に入ると再生されます。</p>
+      <p>アップデートで入った機能から。画面に入ると再生されます。</p>
     </div>
     <div class="grid4" id="gallery">
       <figure class="clip rv"><video data-auto muted loop playsinline preload="none" poster="assets/v-mix.webp" aria-label="混色の動画"><source src="assets/v-mix.mp4" type="video/mp4"></video><figcaption><b>混色</b><span>下の色を拾いながら伸びる筆</span></figcaption></figure>
@@ -204,12 +256,42 @@
   </div>
 </section>
 
-<section id="works">
+<section id="mobile">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="num">参 — IN THE WORKS</div>
+      <h2>いま作っているもの<span class="soon">開発中</span></h2>
+      <p>Nishikie Lab は毎日のように手を入れています。次に届けたいものを、作業台の上から少しだけ。</p>
+    </div>
+    <div class="wip">
+      <div class="phones rv" aria-label="モバイル版の開発中スクリーンショット">
+        <figure class="phone"><img src="assets/m-1.webp" width="720" height="1558" loading="lazy" alt="モバイル版の開発中画面（キャンバスと、縦に並んだ道具・下のドック）"></figure>
+        <figure class="phone"><img src="assets/m-2.webp" width="720" height="1558" loading="lazy" alt="モバイル版の開発中画面（ブラシの選択と不透明度）"></figure>
+        <figure class="phone"><img src="assets/m-3.webp" width="720" height="1558" loading="lazy" alt="モバイル版の開発中画面（レイヤー一覧）"></figure>
+      </div>
+      <div class="rv">
+        <h3><span class="tag">モバイル版</span>スマホ・タブレットでも。</h3>
+        <p>同じエンジン、同じ筆を、指とペンで使えるように組み直しています。片手で届く位置に道具をまとめ、ドックは画面のどの端へも動かせます。パソコン版で作った筆やマテリアルをそのまま持ち込めることを目標にしています。</p>
+      </div>
+    </div>
+    <div class="wip">
+      <figure class="wcmedia rv"><video data-auto muted loop playsinline preload="none" poster="assets/w-watercolor.webp" width="960" height="640" aria-label="水彩の筆で置いた色が紙の上でにじんで広がり、真ん中に水を落として吹き広げ、乾いて縁が残る様子"><source src="assets/w-watercolor.mp4" type="video/mp4"></video></figure>
+      <div class="rv">
+        <h3><span class="tag">水彩の筆</span>にじむ、混ざる、乾いて縁が残る。</h3>
+        <p>紙の上の水と絵の具の動きを計算する水彩の筆を試作しています。たっぷり置いた色はギザギザの縁で広がり、隣の色と濁らずに混ざり、乾くと縁が濃く残ります。濡れているうちに水を落とせば白く押し出され、息を吹けば筋になって散ります。</p>
+        <p>描いたところは乾けばふつうのレイヤーの絵になるので、ほかの筆やマテリアルとそのまま組み合わせられる予定です。</p>
+      </div>
+    </div>
+    <p class="note rv">開発中のため、画面・機能・時期は変わることがあります。続報は X の <a href="https://x.com/nao3art" rel="noopener">@nao3art</a> で。</p>
+  </div>
+</section>
+
+<section id="works" class="alt">
   <div class="wrap works">
     <img class="rv" src="assets/eshido.webp" width="1500" height="500" loading="lazy" alt="絵師堂 Eshido のロゴと、大筆を構える女性の墨絵">
     <div class="rv">
       <div class="sec-head" style="margin:0">
-        <div class="num">参 — BY A PAINTER</div>
+        <div class="num">肆 — BY A PAINTER</div>
         <h2>絵描きが、自分のために作った。</h2>
         <p>Nishikie Lab は、絵師堂（Eshido）の NAO が自分の絵のために作り続けているソフトです。使う人から届いた声は、作者が直接読んで次の版に入れています。作品を投稿するときは <b>#NishikieLab</b> を付けてもらえたら見に行きます。</p>
       </div>
@@ -217,10 +299,10 @@
   </div>
 </section>
 
-<section id="spec" class="alt">
+<section id="spec">
   <div class="wrap">
     <div class="sec-head rv">
-      <div class="num">肆 — REQUIREMENTS</div>
+      <div class="num">伍 — REQUIREMENTS</div>
       <h2>動作環境</h2>
       <p>買う前に、お使いのパソコンで動くかをその場で確かめられます。</p>
     </div>
@@ -240,10 +322,10 @@
   </div>
 </section>
 
-<section id="get">
+<section id="get" class="alt">
   <div class="wrap">
     <div class="sec-head rv">
-      <div class="num">伍 — GET IT</div>
+      <div class="num">陸 — GET IT</div>
       <h2>入手する</h2>
       <p>まず無料版で描き味を試して、気に入ったら製品版へ。</p>
     </div>
@@ -267,13 +349,23 @@
         <a class="btn ghost" href="https://naocraft5.gumroad.com/" rel="noopener">Get it on Gumroad</a>
       </div>
     </div>
+    <div class="updates rv">
+      <h3>更新履歴 <small>1.x 系は購入済みの方に追加費用なし</small></h3>
+      <dl>
+        <dt>開発中 <span>2026-10</span></dt><dd><a href="#mobile">水彩の筆</a>（水と絵の具の動きを計算する筆。にじみ・混色・乾いた縁。まずは試作）、<a href="#mobile">モバイル版</a></dd>
+        <dt>1.05 <span>2026-10</span></dt><dd>PDFの書き出し・読み込み（画像として）、UIテーマ「桜和紙」を標準に（これまでの見た目は「錦」で選べます）、混色に「絵の具」方式、左右／上下反転、ツールの長押しメニュー、フォルダへのドラッグ&amp;ドロップの改善、クリッピングとブレンドの合成の修正、ほか不具合修正</dd>
+        <dt>1.04 <span>2026-10</span></dt><dd>筆えらびとブラシプリセット、テクスチャスロット（レイヤーを筆のテクスチャに）、リボン／スタンプ／テクスチャを敷くの作り直し、ライティングと法線マップ、ベクター消しゴムの強化、ほか多数の修正</dd>
+        <dt>1.03 <span>2026-09</span></dt><dd>混色の不具合修正、点描ブラシの作り直し、はみ出し防止の高速化、グリッド変形、移動ツールの操作バー、タイムラプス書き出しの改善</dd>
+        <dt>1.02 <span>2026-09</span></dt><dd>新ブラシ（点描・鱗）、コピースタンプ、はみ出し防止「自動」、境目から線画を作る、手ブレ補正・速さで入り抜き・最小の太さ、掃き筆の改良</dd>
+      </dl>
+    </div>
   </div>
 </section>
 
-<section id="faq" class="alt">
+<section id="faq">
   <div class="wrap" style="max-width:820px">
     <div class="sec-head rv">
-      <div class="num">陸 — FAQ</div>
+      <div class="num">漆 — FAQ</div>
       <h2>よくある質問</h2>
     </div>
     <div class="faq rv">

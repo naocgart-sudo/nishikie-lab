@@ -44,8 +44,8 @@
       "description": "A paint app where brushes, paper and layer effects are all GLSL shaders you can edit. Runs from a single HTML file in your browser, with no install and no network access.",
       "applicationCategory": "DesignApplication",
       "applicationSubCategory": "Painting software",
-      "softwareVersion": "1.05",
-      "dateModified": "2026-10-16",
+      "softwareVersion": "1.06",
+      "dateModified": "2026-11-06",
       "operatingSystem": "Windows, macOS, Linux (WebGL2 browser)",
       "inLanguage": ["en", "ja"],
       "image": "https://naocgart-sudo.github.io/nishikie-lab/assets/og-en.jpg",
@@ -95,7 +95,7 @@
   <canvas id="heroGL" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
-      <span class="kicker">SHADER-NATIVE PAINT APP <em class="ver">latest 1.05</em></span>
+      <span class="kicker">SHADER-NATIVE PAINT APP <em class="ver">latest 1.06</em></span>
       <h1>
         <span class="name">Nishikie Lab</span>
         <span class="line"><span>Every brush, paper</span></span>
@@ -271,8 +271,8 @@
       <figure class="wcmedia rv"><video data-auto muted loop playsinline preload="none" poster="../assets/w-watercolor.webp" width="960" height="640" aria-label="Watercolor brush: colors bleed and spread across the paper, a drop of water and a breath of air push the paint outward, and dark edges remain as it dries"><source src="../assets/w-watercolor.mp4" type="video/mp4"></video></figure>
       <div class="rv">
         <h3><span class="tag">WATERCOLOR BRUSH</span>It bleeds, it blends, it dries with an edge.</h3>
-        <p>A watercolor brush that simulates water and pigment moving on paper. A loaded wash spreads with ragged edges, mingles with its neighbors without turning muddy, and dries with a dark rim. Drop water into a wet wash to push the color out, or blow on it to scatter it into streaks.</p>
-        <p>Once dry it becomes an ordinary painted layer, so it is meant to combine freely with the other brushes and materials.</p>
+        <p>A watercolor brush that simulates water and pigment moving on paper — <b>available since 1.06</b> (and still growing). A loaded wash spreads with ragged edges, mingles with its neighbors without turning muddy, and dries with a dark rim. Drop water into a wet wash to push the color out, or blow on it to scatter it into streaks.</p>
+        <p>Once dry it becomes an ordinary painted layer, so it combines freely with the other brushes and materials.</p>
       </div>
     </div>
     <p class="note rv">Screens, features and timing may change while in development. Follow <a href="https://x.com/nao3art" rel="noopener">@nao3art</a> on X for news.</p>
@@ -345,7 +345,8 @@
     <div class="updates rv">
       <h3>Release notes <small>1.x updates are free for existing customers</small></h3>
       <dl>
-        <dt>In the works <span>Oct 2026</span></dt><dd><a href="#mobile">Watercolor brush</a> (simulates water and pigment on paper: bleeding, mingling, dried edges; prototype stage), <a href="#mobile">mobile edition</a></dd>
+        <dt>In the works <span>Nov 2026</span></dt><dd><a href="#mobile">mobile edition</a></dd>
+        <dt>1.06 <span>Nov 2026</span></dt><dd>Watercolor brush (simulates water and pigment: bleeding, mixing, dried edges, crisp fine lines), Auto-select brush (Shift+W) and “Refine edge” (cuts out hair and fur edges), Warp “Push left / Push right” and a pixel-art mode, a file browser with thumbnails, paste from the OS clipboard, bigger recent-files list (higher limit, hide, search, paging), interpolation for Move-tool scaling (smooth / sharp / pixel), “Snap selection to pixels”, folder creation now uses the same placement as adding a layer, Alt also subtracts from a selection (moving the selection itself is now Alt+Shift+drag), AI-depth settings are saved with the project, Quick Filters (beta, Blur), a fix for Multiply layers disappearing over transparency or when clipped, a fix for blend modes inside masked pass-through folders not reaching layers below, a fix for PSD export failing on some images, light direction / hue drift / light & shadow colors for Pseudo Lighting, per-stroke color jitter for brushes, "Spread falloff" for the Auto-select brush, a fix for cut & paste not returning to the original position, and other fixes</dd>
         <dt>1.05 <span>Oct 2026</span></dt><dd>PDF export and import (as images), new default UI theme “Sakura washi” (the previous look is available as “Nishiki”), “Paint” color-mixing mode, flip horizontal/vertical, tool long-press menus, better drag &amp; drop into folders, clipping + blend mode compositing fixes, and other fixes</dd>
         <dt>1.04 <span>Oct 2026</span></dt><dd>Brush picker and brush presets, texture slots (use a layer as a brush texture), rebuilt Ribbon / Stamp / Tile brushes, lighting and normal maps, stronger vector eraser, many fixes</dd>
         <dt>1.03 <span>Sep 2026</span></dt><dd>Fixed color mixing, rebuilt the Stipple brush, faster spill guard, grid transform, a control bar for the Move tool, better time-lapse export</dd>

@@ -1,0 +1,133 @@
+/* Nishikie Lab site — LUX skin (試作 2026-11-07)
+   「和風・高級感・ラグジュアリー(濃紺の地 × 金 × 朱 × 流れる墨線)」を軸に、ポップ版の仕掛け
+   (見出しのチップ / 波の継ぎ目 / 小物の浮遊 / ピルボタン / ステッカー風カード / 控えめな網点)を金と朱で移植。
+   site.css の上から被せるだけ(マークアップは本番と同じ)。常にダーク配色 */
+:root{
+  --paper:#14171d; --paper2:#1a1e26; --paper3:#151b2a; --card:#1f242d; --ink:#e9e3d6; --ink2:#b9b6ad; --dim:#8a8d96;
+  --shu:#e06a4f; --shu2:#ff8b6a; --gold:#d3b06a; --gold2:#f0d79a; --gold3:#8c7340; --line:#2e333d; --ai:#2b4a7a;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  --gl:0 0 0 1px rgba(211,176,106,.28);
+  color-scheme:dark;
+}
+body{background:var(--paper)}
+::selection{background:var(--shu);color:#fff}
+section,.hero{position:relative;overflow:hidden}
+section > .wrap,.hero > .wrap{position:relative;z-index:2}
+
+/* ---- カラーハーフトーン(lux.js が canvas に描く。点の大きさで消える) ---- */
+.ht{position:absolute;left:0;top:0;pointer-events:none;z-index:0}
+
+/* ---- 波の継ぎ目: 次のセクションの色で塗り + 金の細い線 ---- */
+.wave{position:absolute;left:0;right:0;bottom:-2px;height:clamp(34px,5vw,72px);z-index:3;pointer-events:none}
+.wave svg{display:block;width:100%;height:100%}
+.wave .ln{fill:none;stroke:var(--gold);stroke-width:1.2;opacity:.55;vector-effect:non-scaling-stroke}
+
+/* 背景の色分け(濃紺 / 墨 / 藍 / 深い朱) */
+#features{background:var(--paper)}
+#motion{background:linear-gradient(180deg,#151b2a,#121722)}
+#mobile{background:var(--paper2)}
+#works{background:linear-gradient(180deg,#1b1414,#1f1718)}
+#spec{background:var(--paper)}
+#get{background:linear-gradient(180deg,#151b2a,#111622)}
+#faq{background:var(--paper2)}
+section.alt{background:initial}
+
+/* ---- header ---- */
+.nav{background:rgba(20,23,29,.78)}
+.nav .lang{border-color:rgba(211,176,106,.5);color:var(--gold2)}
+.nav ul a:hover{color:var(--gold2)}
+
+/* ---- hero: 墨線はそのまま。金の網点と小物を足す ---- */
+.hero{padding:64px 0 110px}
+.hero canvas{opacity:1}
+.kicker{color:var(--gold2);border:1px solid rgba(211,176,106,.55);border-radius:99px;padding:5px 14px 5px 12px;background:rgba(20,23,29,.6);backdrop-filter:blur(4px)}
+.kicker::before{width:18px;background:var(--gold)}
+.kicker .ver{background:var(--shu);border-color:var(--shu);color:#fff}
+.hero h1{text-shadow:0 0 30px rgba(211,176,106,.12)}
+.hero h1 .line:nth-child(2)>span{background:linear-gradient(90deg,#f6efe0,#e9e3d6 60%,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.chips li{border-color:rgba(211,176,106,.35);background:rgba(31,36,45,.7)}
+.btn{border-radius:99px;padding:14px 26px;font-weight:700;position:relative;overflow:hidden}
+.btn.primary{background:linear-gradient(90deg,var(--shu) 0%,#d8955a 55%,var(--gold) 100%);border-color:transparent;color:#1a1410;box-shadow:0 10px 30px -10px rgba(224,106,79,.6)}
+.btn.primary small{color:#2a1c12;opacity:.8}
+.btn.primary::before,.btn.primary::after{content:"✦";position:absolute;color:#fff6dc;font-size:12px;animation:twinkle 1.8s ease-in-out infinite}
+.btn.primary::before{left:9px;top:5px}.btn.primary::after{right:9px;bottom:5px;animation-delay:.9s}
+.btn.primary::after{content:"✦"}
+.btn.ghost{border-color:rgba(211,176,106,.55);color:var(--gold2)}
+.btn.ghost:hover{background:rgba(211,176,106,.08)}
+.art img{border-radius:10px;box-shadow:0 0 0 1px rgba(211,176,106,.35),10px 10px 0 -2px rgba(224,106,79,.55),0 30px 60px -20px rgba(0,0,0,.7)}
+.art::before{inset:-18px -18px auto auto;width:72px;height:72px;border-color:var(--gold);opacity:.8;animation:spin 24s linear infinite}
+.art::after{content:"✦";position:absolute;left:-14px;bottom:60px;color:var(--gold2);font-size:22px;animation:twinkle 2.6s ease-in-out infinite}
+
+/* ---- 見出し: 金の鎖線チップが見出しに掛かる ---- */
+section{padding:100px 0 110px}
+.sec-head{position:relative}
+.sec-head .num{position:relative;z-index:2;display:inline-block;font-size:12px;letter-spacing:.22em;color:#1a1410;
+  background:linear-gradient(90deg,var(--gold2),var(--gold));padding:5px 14px 5px 16px;border-radius:99px;transform:rotate(-2.5deg);margin:0 0 -6px 4px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.15) inset,0 6px 16px -6px rgba(0,0,0,.6)}
+.sec-head h2{font-size:clamp(30px,4.2vw,50px);line-height:1.2;margin:4px 0 14px;text-shadow:3px 3px 0 rgba(211,176,106,.22)}
+#works .sec-head h2{font-size:clamp(26px,3vw,36px)}
+.sec-head p{color:var(--ink2)}
+.sec-head::after{content:"";display:block;width:64px;height:2px;margin-top:16px;background:linear-gradient(90deg,var(--shu),var(--gold));border-radius:2px}
+.feature h3 .tag,.wip h3 .tag{display:table;color:var(--gold2);border:1px solid rgba(211,176,106,.5);border-radius:99px;padding:2px 10px;margin-bottom:10px;transform:rotate(-1.5deg)}
+
+/* ---- カード: 金の髪線 + 朱のずれ影(ステッカー) ---- */
+.feature .media,.clip,.phone,.works img{border-radius:16px;box-shadow:var(--gl),8px 8px 0 -1px rgba(224,106,79,.35),0 20px 50px -20px rgba(0,0,0,.7);transition:transform .35s}
+.feature:nth-child(even) .media{box-shadow:var(--gl),-8px 8px 0 -1px rgba(211,176,106,.35),0 20px 50px -20px rgba(0,0,0,.7)}
+.feature .media:hover,.clip:hover{transform:translate(-2px,-3px) rotate(-.4deg)}
+.clip figcaption b{color:var(--gold2)}
+.plan{border-radius:18px;border:1px solid rgba(211,176,106,.3);background:linear-gradient(180deg,#232935,#1b2029);box-shadow:var(--gl)}
+.plan.main{border:1px solid var(--gold);box-shadow:0 0 0 1px var(--gold),8px 8px 0 -1px rgba(224,106,79,.45),0 0 60px -20px rgba(211,176,106,.5)}
+.plan.main::before{background:linear-gradient(90deg,var(--shu),#d8955a);color:#1a1410;font-weight:700;transform:rotate(-3deg);left:16px;top:-14px;padding:3px 12px}
+.plan .price{color:var(--gold2)}
+.list li::before{background:var(--gold)}
+.spec th,.spec td,.faq details,.faq details:last-child,.updates{border-color:rgba(211,176,106,.22)}
+.faq summary::after{color:var(--gold)}
+.updates dt{color:var(--gold2)}
+#mobile .sec-head h2 .soon{background:var(--shu);color:#fff;transform:rotate(-4deg)}
+footer{border-top:1px solid rgba(211,176,106,.25);background:#0f1116}
+
+/* ---- 浮遊する小物(金の星・朱の丸・金の輪・網点の切れ端)。本文の外側に ---- */
+.deco{position:absolute;z-index:1;pointer-events:none;user-select:none;font-size:var(--sz,20px);line-height:1;opacity:.9;
+  animation:floaty var(--dur,7s) ease-in-out infinite alternate}
+.deco.star{color:var(--gold2);text-shadow:0 0 12px rgba(240,215,154,.6);animation:floaty var(--dur,7s) ease-in-out infinite alternate,twinkle 3.2s ease-in-out infinite}
+.deco.dot{width:var(--sz,10px);height:var(--sz,10px);border-radius:50%;background:var(--shu);box-shadow:0 0 14px rgba(224,106,79,.6);font-size:0}
+.deco.ring{width:var(--sz,36px);height:var(--sz,36px);border:1.5px solid var(--gold);border-radius:50%;font-size:0;opacity:.7;animation:floaty var(--dur,7s) ease-in-out infinite alternate,spin var(--spin,18s) linear infinite}
+.deco.ring::after{content:"";position:absolute;inset:4px;border:1px solid rgba(211,176,106,.4);border-radius:50%}
+.deco.dots{width:var(--sz,70px);height:calc(var(--sz,70px)*.5);font-size:0;opacity:.5;
+  background:radial-gradient(circle,var(--gold) 0 1.5px,transparent 2px) 0 0/9px 9px;transform:rotate(-18deg)}
+.deco.sei{width:var(--sz,80px);height:calc(var(--sz,80px)*.5);font-size:0;opacity:.45;
+  background:radial-gradient(circle at 50% 100%,transparent 60%,rgba(211,176,106,.9) 61%,rgba(211,176,106,.9) 64%,transparent 65%,transparent 78%,rgba(211,176,106,.9) 79%,rgba(211,176,106,.9) 82%,transparent 83%) 0 0/28px 14px,
+             radial-gradient(circle at 50% 100%,transparent 60%,rgba(211,176,106,.9) 61%,rgba(211,176,106,.9) 64%,transparent 65%,transparent 78%,rgba(211,176,106,.9) 79%,rgba(211,176,106,.9) 82%,transparent 83%) 14px 7px/28px 14px}
+@keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-12px)}}
+@keyframes spin{to{rotate:360deg}}
+@keyframes twinkle{0%,100%{opacity:.45;scale:.85}50%{opacity:1;scale:1.1}}
+@media (prefers-reduced-motion:reduce){.deco,.btn.primary::before,.btn.primary::after,.art::before,.art::after{animation:none}}
+@media (max-width:760px){.deco{display:none}}
+
+/* ---- 入手セクションの背景にも墨線(lux.js が canvas を足す) ---- */
+canvas.inkline{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+
+/* ==== 強め(旧 lux2.css) ==== */
+/* LUX2: lux.css の上に重ねて「クリエイターズ風」を強める(網点を大きく濃く / チップを朱で大きく / 波を太く / 小物を大きく多く / ステッカーの傾き) */
+.wave{height:clamp(50px,8vw,120px)}
+.wave .ln{stroke-width:3;opacity:.9}
+.sec-head .num{font-size:14px;padding:8px 20px 8px 22px;background:var(--shu);color:#fff;transform:rotate(-4deg);margin-bottom:-14px;margin-left:-6px;box-shadow:3px 3px 0 var(--gold),0 10px 20px -8px rgba(0,0,0,.7)}
+.sec-head h2{font-size:clamp(36px,5.4vw,66px);text-shadow:5px 5px 0 rgba(224,106,79,.45)}
+.sec-head::after{width:120px;height:4px}
+.feature h3 .tag,.wip h3 .tag{background:var(--gold);color:#1a1410;border:none;font-weight:700;transform:rotate(-3deg);box-shadow:2px 2px 0 var(--shu)}
+.feature .media,.clip{transform:rotate(-1.2deg)}
+.feature:nth-child(even) .media{transform:rotate(1.2deg)}
+.feature .media,.clip,.phone,.works img{box-shadow:0 0 0 4px #f3ede2,0 0 0 5px rgba(0,0,0,.4),12px 12px 0 0 var(--shu),0 24px 60px -20px rgba(0,0,0,.8)}
+.feature:nth-child(even) .media{box-shadow:0 0 0 4px #f3ede2,0 0 0 5px rgba(0,0,0,.4),-12px 12px 0 0 var(--gold),0 24px 60px -20px rgba(0,0,0,.8)}
+.art img{box-shadow:0 0 0 6px #f3ede2,14px 14px 0 0 var(--shu),0 30px 60px -20px rgba(0,0,0,.8);transform:rotate(-2.5deg)}
+.btn{font-size:17px;padding:16px 30px;box-shadow:4px 4px 0 var(--gold)}
+.btn.primary{box-shadow:4px 4px 0 #f3ede2}
+.kicker{background:var(--gold);color:#1a1410;border:none;font-weight:800;transform:rotate(-2deg);box-shadow:3px 3px 0 var(--shu)}
+.kicker::before{background:#1a1410}
+.deco{opacity:1}
+.deco.star{font-size:calc(var(--sz,20px)*1.8)}
+.deco.dot{width:calc(var(--sz,10px)*2);height:calc(var(--sz,10px)*2)}
+.deco.ring{width:calc(var(--sz,36px)*1.6);height:calc(var(--sz,36px)*1.6);border-width:3px}
+.deco.dots,.deco.sei{opacity:.85;width:calc(var(--sz,70px)*1.5);height:calc(var(--sz,70px)*.75)}
+.plan{transform:rotate(-1deg)}.plan.main{transform:rotate(1deg) scale(1.03)}.plan:last-child{transform:rotate(1.5deg)}
+.plan.main::before{font-size:14px;padding:5px 16px;left:14px;top:-18px;transform:rotate(-6deg);box-shadow:2px 2px 0 var(--gold)}

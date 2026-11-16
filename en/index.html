@@ -44,8 +44,8 @@
       "description": "A paint app where brushes, paper and layer effects are all GLSL shaders you can edit. Runs from a single HTML file in your browser, with no install and no network access.",
       "applicationCategory": "DesignApplication",
       "applicationSubCategory": "Painting software",
-      "softwareVersion": "1.06",
-      "dateModified": "2026-11-06",
+      "softwareVersion": "1.07",
+      "dateModified": "2026-11-17",
       "operatingSystem": "Windows, macOS, Linux (WebGL2 browser)",
       "inLanguage": ["en", "ja"],
       "image": "https://naocgart-sudo.github.io/nishikie-lab/assets/og-en.jpg",
@@ -95,7 +95,7 @@
   <canvas id="heroGL" aria-hidden="true"></canvas>
   <div class="wrap">
     <div>
-      <span class="kicker">SHADER-NATIVE PAINT APP <em class="ver">latest 1.06</em></span>
+      <span class="kicker">SHADER-NATIVE PAINT APP <em class="ver">latest 1.07</em></span>
       <h1>
         <span class="name">Nishikie Lab</span>
         <span class="line"><span>Every brush, paper</span></span>
@@ -346,6 +346,7 @@
       <h3>Release notes <small>1.x updates are free for existing customers</small></h3>
       <dl>
         <dt>In the works <span>Nov 2026</span></dt><dd><a href="#mobile">mobile edition</a></dd>
+        <dt>1.07 <span>Nov 2026</span></dt><dd>New “Lighting” section (Simple = tick one box and light falls on your art / Advanced = fine control with a card per light), a window for choosing how depth is made (inflate from the outline / from another layer’s brightness / AI depth — light works without preparing a grayscale depth map), Shadow color, Shadow level, a Shade colors bar, Rim color and Band position for cel shading, Join assist (experimental: release a stroke near the end of another line and they join smoothly; on vector layers the two become a single line and can close into a loop; toggle with the J key), “Lens bokeh” in the Blur material (photographic bokeh where lights become discs), “Color correction+ (Nishikie Lab only)”, materials on folders, “Scale pattern with size” for brushes, editable keyboard shortcuts, reworked Tools section, per-pixel anti-aliased edges for the Quick Select Brush, “Overlay opacity” for Vector edit, numeric input for the Move tool’s scale and rotation, “Crop to selection” in the Canvas section, resolution choice for AI depth, an updated AI request template, and other fixes</dd>
         <dt>1.06 <span>Nov 2026</span></dt><dd>Watercolor brush (simulates water and pigment: bleeding, mixing, dried edges, crisp fine lines), Auto-select brush (Shift+W) and “Refine edge” (cuts out hair and fur edges), Warp “Push left / Push right” and a pixel-art mode, a file browser with thumbnails, paste from the OS clipboard, bigger recent-files list (higher limit, hide, search, paging), interpolation for Move-tool scaling (smooth / sharp / pixel), “Snap selection to pixels”, folder creation now uses the same placement as adding a layer, Alt also subtracts from a selection (moving the selection itself is now Alt+Shift+drag), AI-depth settings are saved with the project, Quick Filters (beta, Blur), a fix for Multiply layers disappearing over transparency or when clipped, a fix for blend modes inside masked pass-through folders not reaching layers below, a fix for PSD export failing on some images, light direction / hue drift / light & shadow colors for Pseudo Lighting, per-stroke color jitter for brushes, "Spread falloff" for the Auto-select brush, a fix for cut & paste not returning to the original position, and other fixes</dd>
         <dt>1.05 <span>Oct 2026</span></dt><dd>PDF export and import (as images), new default UI theme “Sakura washi” (the previous look is available as “Nishiki”), “Paint” color-mixing mode, flip horizontal/vertical, tool long-press menus, better drag &amp; drop into folders, clipping + blend mode compositing fixes, and other fixes</dd>
         <dt>1.04 <span>Oct 2026</span></dt><dd>Brush picker and brush presets, texture slots (use a layer as a brush texture), rebuilt Ribbon / Stamp / Tile brushes, lighting and normal maps, stronger vector eraser, many fixes</dd>

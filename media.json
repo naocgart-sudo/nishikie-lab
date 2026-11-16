@@ -1,5 +1,67 @@
 [
   {
+    "file": "v-bokeh.mp4",
+    "poster": "v-bokeh.webp",
+    "wide": true,
+    "ja": {
+      "title": "レンズのボケ",
+      "desc": "灯りが円い面になる、写真のボケ"
+    },
+    "en": {
+      "title": "Lens bokeh",
+      "desc": "Lights become discs, like a photo"
+    }
+  },
+  {
+    "file": "v-joincolor-compare.mp4",
+    "poster": "v-joincolor-compare.webp",
+    "wide": true,
+    "ja": {
+      "title": "つなぎ補正で線画",
+      "desc": "色を変えながら引く。左＝なし／右＝あり"
+    },
+    "en": {
+      "title": "Line art with Join assist",
+      "desc": "Changing colors as you draw. Left: off / right: on"
+    }
+  },
+  {
+    "file": "v-light.mp4",
+    "poster": "v-light.webp",
+    "ja": {
+      "title": "ライティング",
+      "desc": "チェックひとつで、絵に光が入る"
+    },
+    "en": {
+      "title": "Lighting",
+      "desc": "One tick puts light on your art"
+    }
+  },
+  {
+    "file": "v-shade.mp4",
+    "poster": "v-shade.webp",
+    "ja": {
+      "title": "明暗の色",
+      "desc": "影へ入る途中に、好きな色を置く"
+    },
+    "en": {
+      "title": "Shade colors",
+      "desc": "Place any color on the way into shadow"
+    }
+  },
+  {
+    "file": "v-join.mp4",
+    "poster": "v-join.webp",
+    "ja": {
+      "title": "つなぎ補正（試験版）",
+      "desc": "離した線の端が、なめらかにつながる"
+    },
+    "en": {
+      "title": "Join assist (experimental)",
+      "desc": "Line ends join smoothly on release"
+    }
+  },
+  {
     "file": "v-mix.mp4",
     "poster": "v-mix.webp",
     "ja": {
